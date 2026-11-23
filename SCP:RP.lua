@@ -68,12 +68,12 @@ local UnarmedTeams = {
 }
 
 local ColorPresets = {
-	["Red"]    = Color3.fromRGB(220, 50, 50),
-	["Green"]  = Color3.fromRGB(50, 200, 80),
-	["Blue"]   = Color3.fromRGB(50, 120, 220),
-	["White"]  = Color3.fromRGB(255, 255, 255),
+	["Red"] = Color3.fromRGB(220, 50, 50),
+	["Green"] = Color3.fromRGB(50, 200, 80),
+	["Blue"] = Color3.fromRGB(50, 120, 220),
+	["White"] = Color3.fromRGB(255, 255, 255),
 	["Yellow"] = Color3.fromRGB(230, 200, 50),
-	["Cyan"]   = Color3.fromRGB(50, 200, 220),
+	["Cyan"] = Color3.fromRGB(50, 200, 220),
 	["Purple"] = Color3.fromRGB(160, 50, 220),
 	["Orange"] = Color3.fromRGB(230, 130, 50),
 }
@@ -263,11 +263,11 @@ local function createPlayerDrawings(player)
 	local visuals = {}
 	local connections = {}
 
-	for index = 1, 8 do
-		local cornerLine = Drawing.new("Line")
-		cornerLine.Thickness = ESP.Settings.BoxThickness
-		cornerLine.Visible = false
-		visuals["Corner" .. index] = cornerLine
+	for index = 1, 4 do
+		local boxLine = Drawing.new("Line")
+		boxLine.Thickness = ESP.Settings.BoxThickness
+		boxLine.Visible = false
+		visuals["BoxLine" .. index] = boxLine
 	end
 
 	local nameLabel = Drawing.new("Text")
@@ -421,7 +421,7 @@ RunService:BindToRenderStep("HubRender", Enum.RenderPriority.Last.Value, functio
 	local espSettings = getgenv().ESP.Settings
 
 	fieldOfViewCircle.Radius = silentAimSettings.FieldOfView.Radius
-	fieldOfViewCircle.Position = mousePosition
+	fieldOfViewCircle.Position = Vector2.new(viewportSize.X / 2, viewportSize.Y / 2)
 	fieldOfViewCircle.Color = silentAimSettings.FieldOfView.Color
 	fieldOfViewCircle.Visible = silentAimSettings.FieldOfView.Enabled
 		and silentAimSettings.FieldOfView.Draw
@@ -494,50 +494,32 @@ RunService:BindToRenderStep("HubRender", Enum.RenderPriority.Last.Value, functio
 		local boxWidth = boxHeight * CHARACTER_WIDTH_RATIO
 		local boxLeft = centerX - boxWidth / 2
 		local boxRight = centerX + boxWidth / 2
-		local armLength = math.min(boxWidth, boxHeight) * 0.25
 		local boxColor = getPlayerColor(player)
 		local boxThickness = espSettings.BoxThickness
 
-		visuals.Corner1.From = Vector2.new(boxLeft, boxTop)
-		visuals.Corner1.To = Vector2.new(boxLeft + armLength, boxTop)
-		visuals.Corner1.Color = boxColor
-		visuals.Corner1.Thickness = boxThickness
-		visuals.Corner1.Visible = true
-		visuals.Corner2.From = Vector2.new(boxLeft, boxTop)
-		visuals.Corner2.To = Vector2.new(boxLeft, boxTop + armLength)
-		visuals.Corner2.Color = boxColor
-		visuals.Corner2.Thickness = boxThickness
-		visuals.Corner2.Visible = true
-		visuals.Corner3.From = Vector2.new(boxRight - armLength, boxTop)
-		visuals.Corner3.To = Vector2.new(boxRight, boxTop)
-		visuals.Corner3.Color = boxColor
-		visuals.Corner3.Thickness = boxThickness
-		visuals.Corner3.Visible = true
-		visuals.Corner4.From = Vector2.new(boxRight, boxTop)
-		visuals.Corner4.To = Vector2.new(boxRight, boxTop + armLength)
-		visuals.Corner4.Color = boxColor
-		visuals.Corner4.Thickness = boxThickness
-		visuals.Corner4.Visible = true
-		visuals.Corner5.From = Vector2.new(boxLeft, boxBottom)
-		visuals.Corner5.To = Vector2.new(boxLeft + armLength, boxBottom)
-		visuals.Corner5.Color = boxColor
-		visuals.Corner5.Thickness = boxThickness
-		visuals.Corner5.Visible = true
-		visuals.Corner6.From = Vector2.new(boxLeft, boxBottom - armLength)
-		visuals.Corner6.To = Vector2.new(boxLeft, boxBottom)
-		visuals.Corner6.Color = boxColor
-		visuals.Corner6.Thickness = boxThickness
-		visuals.Corner6.Visible = true
-		visuals.Corner7.From = Vector2.new(boxRight - armLength, boxBottom)
-		visuals.Corner7.To = Vector2.new(boxRight, boxBottom)
-		visuals.Corner7.Color = boxColor
-		visuals.Corner7.Thickness = boxThickness
-		visuals.Corner7.Visible = true
-		visuals.Corner8.From = Vector2.new(boxRight, boxBottom - armLength)
-		visuals.Corner8.To = Vector2.new(boxRight, boxBottom)
-		visuals.Corner8.Color = boxColor
-		visuals.Corner8.Thickness = boxThickness
-		visuals.Corner8.Visible = true
+		visuals.BoxLine1.From = Vector2.new(boxLeft, boxTop)
+		visuals.BoxLine1.To = Vector2.new(boxRight, boxTop)
+		visuals.BoxLine1.Color = boxColor
+		visuals.BoxLine1.Thickness = boxThickness
+		visuals.BoxLine1.Visible = true
+
+		visuals.BoxLine2.From = Vector2.new(boxLeft, boxBottom)
+		visuals.BoxLine2.To = Vector2.new(boxRight, boxBottom)
+		visuals.BoxLine2.Color = boxColor
+		visuals.BoxLine2.Thickness = boxThickness
+		visuals.BoxLine2.Visible = true
+
+		visuals.BoxLine3.From = Vector2.new(boxLeft, boxTop)
+		visuals.BoxLine3.To = Vector2.new(boxLeft, boxBottom)
+		visuals.BoxLine3.Color = boxColor
+		visuals.BoxLine3.Thickness = boxThickness
+		visuals.BoxLine3.Visible = true
+
+		visuals.BoxLine4.From = Vector2.new(boxRight, boxTop)
+		visuals.BoxLine4.To = Vector2.new(boxRight, boxBottom)
+		visuals.BoxLine4.Color = boxColor
+		visuals.BoxLine4.Thickness = boxThickness
+		visuals.BoxLine4.Visible = true
 
 		local subdivision = drawings.getCachedSubdivision()
 		local isO5 = drawings.getCachedIsO5()
