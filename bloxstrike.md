@@ -1,6 +1,4 @@
-# BloxStrike Full Recon
-**GameId**: 7633926880 | **PlaceId**: 114234929420007 | **Version**: v9965  
-**Mode**: Private server, passive reads only. No shots fired, no namecall hooks.
+# BloxStrike Reverse Engineered
 
 ---
 
