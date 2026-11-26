@@ -402,19 +402,3 @@ local BulletClass = require(RS.Components.Weapon.Classes.Bullet)
 local WeaponClass = require(RS.Classes.WeaponComponent)
 local CameraController = require(RS.Controllers.CameraController)
 ```
-
----
-
-## Planned Features (approved / queued)
-
-| Feature | Status | Notes |
-|---------|--------|-------|
-| Fix require errors | Ready | Paths confirmed above |
-| ESP rework | Approved | Remove Name/Armor/Skeleton, add health bar lerp, expand tracer |
-| Health bar lerp | Approved | `displayedHealth` per player, 15% lerp per frame |
-| C4 ESP | Queued | Listen to Planted remote, scan workspace for model |
-| Triggerbot | Queued | |
-| Bone priority selector | Queued | |
-| Bunny hop | Queued | |
-| Hit sound | Queued | |
-| ViewTick fix | Pending user choice | velocity gate / distance gate / both |
