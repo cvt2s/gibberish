@@ -1,7 +1,5 @@
 # BloxStrike Reverse Engineered
-
 ---
-
 ## Entry Point
 
 `Players.LocalPlayer.PlayerScripts.Startup`  
